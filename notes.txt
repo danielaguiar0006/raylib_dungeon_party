@@ -1,0 +1,16 @@
+1. Implement tag component and assign "player" tag to player entity
+1. Implement movement system that moves entities with "player" tag
+
+WHEN ADDING NEW .c FILE:
+1. Add the file to the list of sources in the CMakeLists.txt
+
+WHEN CREATING NEW COMPONENT:
+1. Create a new .h file in the src/components/ directory
+2. Add to component_flags enum in utils/defines.h
+3. #include the new .h file in src/components/component_manager.h
+   and create extern component array for the new component
+4. Defines component array in src/components/component_manager.c
+   and implement the corrisponding add_component(), remove_component(),
+   and get_component() logic
+5. memset the component in the destroy_entity() function in entity.c
+6. If neccessary, implement system that uses the new component in src/systems/
