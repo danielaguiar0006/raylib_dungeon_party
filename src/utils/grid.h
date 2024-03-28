@@ -3,6 +3,7 @@
 #include <raylib.h>
 #include "globals.h"
 
+// TODO: remove static and add to grid.c instead
 static Texture2D grid_texture;
 static u32 grid_x;
 static u32 grid_y;
