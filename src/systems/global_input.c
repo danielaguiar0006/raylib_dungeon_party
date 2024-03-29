@@ -7,11 +7,8 @@ static InputState input_state;  // Global input state | Singleton pattern
 // Prototypes
 static Vector2 handle_movement_input(void);
 
-// TODO: is this necessary?
-//void input_init(void) {}
-
 void handle_global_inputs(void) {
-    // TODO: maybe memset the whole input_state?
+    // ? maybe memset the whole input_state?
     //memset(&input_state.action_input, 0, sizeof(ActionInput));  // Zero out the action input
 
     // pass by reference not necessary
@@ -26,7 +23,6 @@ void handle_global_inputs(void) {
 }
 
 InputState* get_input_state(void) {  // Singleton pattern
-    //TODO: is this necessary?
     if (!is_input_initialized) {
         // Initialize input state here
         input_state = (InputState){ 0 };  // Zero out the input state

@@ -14,4 +14,4 @@ void draw_sprites(void);
 /**
  * @brief Unloads all textures from sprite components.
  */
-void unload_sprites(void);  // TODO: eventually move to unload_systems.c/h
+void unload_sprites(void);
