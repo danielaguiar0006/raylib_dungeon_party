@@ -5,5 +5,5 @@
 #include "../utils/globals.h"
 #include "global_input.h"
 
-//TODO FINISH THIS
-void update_player_movement();
+void init_player_actions(void);
+void update_player_movement(void);

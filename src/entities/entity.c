@@ -5,11 +5,6 @@ u32 entity_component_masks[GLOBAL_MAX_ENTITIES] = { 0 };
 // total number of entities
 static u32 entity_count = 0;
 
-void init_entity_system(void) {
-    // TODO: figure out what to put here
-    return;
-}
-
 entity create_entity(void) {
     if (entity_count < GLOBAL_MAX_ENTITIES) {
         for (u32 i = 1; i < GLOBAL_MAX_ENTITIES; i++) {

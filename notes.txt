@@ -1,6 +1,7 @@
 1. Implement tag component and assign "player" tag to player entity
 2. Implement movement system that moves entities with "player" tag
 3. Have the idea of a testbench in the back of your mind...
+4. Make grid an actual entity
 
 WHEN ADDING NEW .c FILE:
 1. Add the file to the list of sources in the CMakeLists.txt

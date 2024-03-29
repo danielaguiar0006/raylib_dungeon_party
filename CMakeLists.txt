@@ -34,7 +34,7 @@ endif()
 
 
 # Our Project
-set(SOURCE_FILES src/main.c  src/utils/globals.c src/utils/grid.c src/core/logger.c src/entities/entity.c src/components/tag_component.c src/components/transform_component.c src/components/component_manager.c
+set(SOURCE_FILES src/main.c  src/utils/globals.c src/utils/grid.c src/core/logger.c src/entities/entity.c src/components/tag_component.c src/components/transform_component.c src/components/component_manager.c src/systems/systems.c
     src/systems/draw_sprites.c src/systems/update_entity_transforms.c src/systems/global_input.c src/systems/player_actions.c)
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 set(raylib_VERBOSE 1)

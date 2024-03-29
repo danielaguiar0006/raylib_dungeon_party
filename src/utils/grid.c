@@ -1,6 +1,6 @@
 #include "grid.h"
 
-void grid_init(void) {
+void init_grid(void) {
     grid_texture = LoadTexture("assets/textures/grid.png");
     grid_x = 0;
     grid_y = 0;
@@ -9,11 +9,11 @@ void grid_init(void) {
     grid_width = (u32)(window_height / (TILE_SIZE_PX * TILE_SCALE_FACTOR));
 }
 
-void grid_destroy(void) {
+void destroy_grid(void) {
     UnloadTexture(grid_texture);
 }
 
-void grid_set(u32 x, u32 y, u32 width, u32 height) {
+void set_grid(u32 x, u32 y, u32 width, u32 height) {
     grid_x = x;
     grid_y = y;
     grid_width = width;
@@ -24,13 +24,13 @@ Vector2 get_grid_size(void) {
     return (Vector2) { (float)grid_width, (float)grid_height };
 }
 
-void grid_update(void) {
+void update_grid(void) {
     // Update grid count based on window size and camera zoom
     grid_width = (u32)(window_width / (TILE_SIZE_PX * TILE_SCALE_FACTOR));
     grid_height = (u32)(window_height / (TILE_SIZE_PX * TILE_SCALE_FACTOR));
 }
 
-void grid_draw(void) {
+void draw_grid(void) {
     for (u32 x = 0; x < grid_width; x++) {
         for (u32 y = 0; y < grid_height; y++) {
             Vector2 grid_position = (Vector2){ (float)(x * TILE_SIZE_PX * TILE_SCALE_FACTOR), (float)(y * TILE_SIZE_PX * TILE_SCALE_FACTOR) };

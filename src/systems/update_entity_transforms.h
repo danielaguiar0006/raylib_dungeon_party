@@ -4,4 +4,4 @@
 #include "../utils/defines.h"
 #include "../utils/globals.h"
 
-void update_transforms(void);
+void update_entity_transforms(void);

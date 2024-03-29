@@ -19,42 +19,35 @@ tag_component* player_tag;
 
 // Local Functions Declaration
 static void UpdateDrawFrame(void); // Update and draw one frame
-static void setup_window(void);
+static void setup_window(void);    // Setup raylib window
+static void init_player(void);     // Create player entity and add components
 
 // Main entry point
 int main(void) {
     // Initialization
     setup_window();
-    init_entity_system();
     init_component_manager();
-    grid_init();
+    init_systems();
+    init_grid();
 
-    player = create_entity();
-    add_component(player, COMPONENT_TRANSFORM);
-    add_component(player, COMPONENT_SPRITE);
-    add_component(player, COMPONENT_TAG);
-    player_transform = (transform_component*)get_component(player, COMPONENT_TRANSFORM);
-    player_sprite = (sprite_component*)get_component(player, COMPONENT_SPRITE);
-    player_tag = (tag_component*)get_component(player, COMPONENT_TAG);
-    set_tag(player_tag, "player");
+    init_player();
+    init_player_actions(); // ! Must be called after player entity is created
 
     camera.target = (Vector2){ 0.0f, 0.0f };
     camera.offset = (Vector2){ 0.0f, 0.0f };  // Top-left corner = (0, 0)
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
 
-    SetTargetFPS(300); // Set our game's frames-per-second
+    SetTargetFPS(200); // Set our game's frames-per-second
 
     // Main game loop
-    while (!WindowShouldClose()) // Detect window close button or ESC key
-    {
+    while (!WindowShouldClose()) {  // Detect window close button or ESC key
         UpdateDrawFrame();
     }
 
     // De-Initialization
-    //TODO: Merge these into a single system
-    unload_sprites();
-    grid_destroy();
+    destroy_systems();
+    destroy_grid();
     CloseWindow(); // Close window and OpenGL context
     return 0;
 }
@@ -62,10 +55,8 @@ int main(void) {
 // Update and draw game frame
 static void UpdateDrawFrame(void) {
     // Update
-    handle_inputs();
-    update_player_movement();
-    update_transforms();
-    grid_update();
+    update_systems();
+    update_grid();
 
     // --- DEBUG -----------------------------------
     if (IsKeyPressed(KEY_E)) {
@@ -98,7 +89,7 @@ static void UpdateDrawFrame(void) {
 
     BeginMode2D(camera);
 
-    grid_draw();
+    draw_grid();
     draw_sprites();
     // DrawRectangleRec(player_sprite->source_rectangle, RED);  // Debug
     // debug midpoint of player
@@ -119,4 +110,15 @@ static void UpdateDrawFrame(void) {
 void setup_window(void) {
     InitWindow(window_width, window_height, "Dungeon Party");
     SetWindowState(FLAG_VSYNC_HINT);
+}
+
+void init_player(void) {
+    player = create_entity();
+    add_component(player, COMPONENT_TRANSFORM);
+    add_component(player, COMPONENT_SPRITE);
+    add_component(player, COMPONENT_TAG);
+    player_transform = (transform_component*)get_component(player, COMPONENT_TRANSFORM);
+    player_sprite = (sprite_component*)get_component(player, COMPONENT_SPRITE);
+    player_tag = (tag_component*)get_component(player, COMPONENT_TAG);
+    set_tag(player_tag, "player");
 }

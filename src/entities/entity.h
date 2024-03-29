@@ -8,8 +8,6 @@ typedef u32 entity;
 
 extern u32 entity_component_masks[GLOBAL_MAX_ENTITIES];
 
-void init_entity_system(void);
-
 /**
  * @brief Creates a new entity
  * @return The newly created entity. or 0 if global_max_entities is reached.

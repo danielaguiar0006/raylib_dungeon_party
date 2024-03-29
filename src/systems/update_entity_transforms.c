@@ -1,6 +1,6 @@
 #include "update_entity_transforms.h"
 
-void update_transforms(void) {  // ! Inactive entities are still updated
+void update_entity_transforms(void) {  // ! Inactive entities are still updated
     for (u32 i = 0; i < GLOBAL_MAX_ENTITIES; i++) {
         if (has_component(i, COMPONENT_TRANSFORM)) {
             // Update grid position based on the current x and y in pixels

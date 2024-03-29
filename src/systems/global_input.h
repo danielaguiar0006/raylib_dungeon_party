@@ -25,5 +25,5 @@ typedef struct InputState {
     // TODO: Add other input states as needed
 } InputState;
 
-void handle_inputs(void);
+void handle_global_inputs(void);
 InputState* get_input_state(void);

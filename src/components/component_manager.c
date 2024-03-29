@@ -9,6 +9,7 @@ transform_component transform_components[GLOBAL_MAX_ENTITIES] = { 0 };
 sprite_component sprite_components[GLOBAL_MAX_ENTITIES] = { 0 };
 velocity_component velocity_components[GLOBAL_MAX_ENTITIES] = { 0 };
 
+// TODO: not doing anything with this yet
 void init_component_manager(void) {
     // initialize component storage, if needed
 }
