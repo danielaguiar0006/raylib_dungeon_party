@@ -62,6 +62,8 @@ int main(void) {
 // Update and draw game frame
 static void UpdateDrawFrame(void) {
     // Update
+    handle_inputs();
+    update_player_movement();
     update_transforms();
     grid_update();
 
@@ -73,18 +75,6 @@ static void UpdateDrawFrame(void) {
         //add_component(ent, COMPONENT_POSITION);
     }
 
-    if (IsKeyDown(KEY_W)) {
-        player_transform->y -= 1.0f;
-    }
-    if (IsKeyDown(KEY_S)) {
-        player_transform->y += 1.0f;
-    }
-    if (IsKeyDown(KEY_A)) {
-        player_transform->x -= 1.0f;
-    }
-    if (IsKeyDown(KEY_D)) {
-        player_transform->x += 1.0f;
-    }
 
     if (IsKeyPressed(KEY_Q)) {
         active_components[player].active = !active_components[player].active;

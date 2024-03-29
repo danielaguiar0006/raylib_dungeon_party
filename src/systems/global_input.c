@@ -1,23 +1,37 @@
-#include "inputs.h"
+#include "global_input.h"
 #include "raymath.h"  // HACK: Including this in the header file cuases a redefinition error?!?
 
 static b8 is_input_initialized = false;
 static InputState input_state;  // Global input state | Singleton pattern
 
+// Prototypes
+static Vector2 handle_movement_input(void);
+
 // TODO: is this necessary?
 //void input_init(void) {}
 
 void handle_inputs(void) {
+    // TODO: maybe memset the whole input_state?
+    //memset(&input_state.action_input, 0, sizeof(ActionInput));  // Zero out the action input
+
     // pass by reference not necessary
     input_state.action_input.movement_delta = handle_movement_input();
+
+    // TODO: handle other input types
+    //handle_action_input(&input_state.action_input);
+    //handle_menu_input(&input_state.menu_input);
+    //handle_gui_input(&input_state.gui_input);
+    //handle_camera_input(&input_state.camera_input);
+    //handle_pause_input(&input_state.pause_input);
 }
 
 InputState* get_input_state(void) {  // Singleton pattern
-    if (!is_input_initialized) {
-        // Initialize input state here
-        input_state = (InputState){ 0 };  // Zero out the input state
-        is_input_initialized = true;
-    }
+    //TODO: is this necessary?
+        /*     if (!is_input_initialized) {
+                // Initialize input state here
+                input_state = (InputState){ 0 };  // Zero out the input state
+                is_input_initialized = true;
+            } */
     return &input_state;
 }
 

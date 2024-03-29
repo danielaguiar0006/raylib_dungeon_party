@@ -3,6 +3,8 @@
 #define TRUE 1
 #define FALSE 0
 
+#define INVALID_ENTITY 0
+
 // Unsigned int types
 typedef unsigned char u8;        // 1 byte
 typedef unsigned short u16;      // 2 bytes

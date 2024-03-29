@@ -22,7 +22,7 @@ entity create_entity(void) {
         }
     }
     KERROR("No more entities available, consider increasing MAX_ENTITIES.");
-    return 0; // 0 is reserved for invalid entities
+    return INVALID_ENTITY; // 0 is reserved for invalid entities
 }
 
 void destroy_entity(entity ent) {
@@ -44,9 +44,9 @@ void destroy_entity(entity ent) {
 }
 
 b8 is_valid_entity(entity ent) {
-    // 0 is reserved for invalid entities
+    // INVALID_ENTITY is 0, so 0 is reserved for invalid entities
     // Logs warnings are defined in specific implementations
-    return ent < GLOBAL_MAX_ENTITIES && entity_component_masks[ent] != COMPONENT_NONE && ent != 0;
+    return ent < GLOBAL_MAX_ENTITIES && entity_component_masks[ent] != COMPONENT_NONE && ent != INVALID_ENTITY;
 }
 
 u32 get_entity_count(void) {
@@ -58,5 +58,5 @@ entity get_entity_by_index(u32 index) {
         return index;
     }
     KWARN("Invalid entity index: %d", index);
-    return 0;
+    return INVALID_ENTITY;
 }
