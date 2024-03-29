@@ -17,7 +17,7 @@ void init_component_manager(void) {
 b8 has_component(entity ent, component_flags component_flag) {
     if (!is_valid_entity(ent)) {
         // FIXME: causes too many warnings
-        //KWARN("Invalid entity: %d, cannot check for component.", ent);
+        //KWARN("Unable to check for component: Invalid entity: %d", ent);
         return FALSE;
     }
     return (entity_component_masks[ent] & component_flag) == component_flag;
@@ -26,15 +26,15 @@ b8 has_component(entity ent, component_flags component_flag) {
 // TODO implement a way to add/remove multiple components at once
 void add_component(entity ent, component_flags component) {
     if (!is_valid_entity(ent)) {
-        KERROR("Invalid entity: %d, cannot add component.", ent);
+        KERROR("Unable to add component: Invalid entity: %d", ent);
         return;
     }
     if (component == COMPONENT_NONE) {
-        KWARN("cannot add component \"COMPONENT_NONE\" to %d, instead use remove_component() or destroy_entity() instead.", ent);
+        KWARN("Unable to add component \"COMPONENT_NONE\" to %d, instead use remove_component() or destroy_entity() instead.", ent);
         return;
     }
     if (has_component(ent, component)) {
-        KWARN("Entity %d already has component %d.", ent, component);
+        KWARN("Unable to add component: Entity %d already has component %d.", ent, component);
         return;
     }
 
@@ -76,7 +76,7 @@ void add_component(entity ent, component_flags component) {
         sprite_components[ent].tint = WHITE;
         break;
     default:
-        KERROR("Invalid component: %d", component);
+        KERROR("Unable add component: Invalid component: %d", component);
         return;
     }
     // Add component to the entity's mask
@@ -86,15 +86,15 @@ void add_component(entity ent, component_flags component) {
 
 void remove_component(entity ent, component_flags component) {
     if (!is_valid_entity(ent)) {
-        KERROR("Invalid entity: %d, cannot remove component.", ent);
+        KERROR("Unable remove component: Invalid entity: %d", ent);
         return;
     }
     if (component == COMPONENT_NONE) {
-        KWARN("cannot remove component \"COMPONENT_NONE\" from %d, instead use add_component() or create_entity() instead.", ent);
+        KWARN("Unable to remove component: \"COMPONENT_NONE\" from %d, instead use add_component() or create_entity() instead.", ent);
         return;
     }
     if (!has_component(ent, component)) {
-        KWARN("Entity %d does not have component %d.", ent, component);
+        KWARN("Unable to remove component: Entity %d does not have component %d.", ent, component);
         return;
     }
 
@@ -102,7 +102,7 @@ void remove_component(entity ent, component_flags component) {
     case COMPONENT_ACTIVE:
         if (entity_component_masks[ent] != COMPONENT_ACTIVE) {  // If there are other components
             // * Get rid of other components first, then remove active component or call destroy_entity()
-            KERROR("Cannot remove active component from entity %d, it is required for other components.", ent);
+            KERROR("Unable remove active component from entity %d, it is required for other components.", ent);
             return;
         }
         memset(&active_components[ent], 0, sizeof(active_component));
@@ -121,7 +121,7 @@ void remove_component(entity ent, component_flags component) {
         memset(&sprite_components[ent], 0, sizeof(sprite_component));
         break;
     default:
-        KERROR("Invalid component: %d", component);
+        KERROR("Unable Remove Component: Invalid component: %d", component);
         return;
     }
     // remove component to the entity's mask
@@ -131,7 +131,7 @@ void remove_component(entity ent, component_flags component) {
 
 void* get_component(entity ent, component_flags component_flag) {
     if (!has_component(ent, component_flag)) {
-        KERROR("Entity %d does not have component %d", ent, component_flag);
+        KERROR("Unable get component: Entity %d does not have component %d", ent, component_flag);
         return NULL;
     }
     else {
@@ -147,7 +147,7 @@ void* get_component(entity ent, component_flags component_flag) {
         case COMPONENT_SPRITE:
             return &sprite_components[ent];
         default:
-            KERROR("Invalid component: %d", component_flag);
+            KERROR("Unable get component: Invalid component: %d", component_flag);
             return NULL;
         }
     }

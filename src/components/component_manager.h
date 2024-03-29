@@ -42,7 +42,11 @@ b8 has_component(entity ent, component_flags component_flag);
  */
 void add_component(entity ent, component_flags component);
 
-// TODO: documentation
+/**
+ * @brief Removes a component from an entity.
+ * @param ent The entity from which to remove the component.
+ * @param component The component to remove.
+ */
 void remove_component(entity ent, component_flags component);
 
 /**

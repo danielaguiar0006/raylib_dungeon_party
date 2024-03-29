@@ -3,6 +3,7 @@
 #include <raylib.h>            // Vector2
 #include "../utils/globals.h"  // TILE_SCALE_FACTOR 
 #include "../utils/defines.h"
+#include "../core/logger.h"
 
 typedef struct transform_component {
     f32 x;

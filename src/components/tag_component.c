@@ -2,13 +2,13 @@
 
 void set_tag(tag_component* component, const char* tag) {
     if (component == NULL || tag == NULL) {
-        //TODO: Handle error: null pointer
+        KERROR("Unable to set tag: Component or tag is NULL");
         return;
     }
 
     size_t tag_length = strlen(tag);
     if (tag_length >= sizeof(component->tag)) {
-        //TODO: Handle error: tag is too long
+        KERROR("Unable to set tag: Tag is too long: %s", tag);
         return;
     }
 
