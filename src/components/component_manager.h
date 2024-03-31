@@ -13,10 +13,8 @@
 #include "velocity_component.h"
 
 // Constants
-const f32 DEFAULT_X;
-const f32 DEFAULT_Y;
-const f32 DEFAULT_WIDTH;
-const f32 DEFAULT_HEIGHT;
+extern const f32 DEFAULT_X;
+extern const f32 DEFAULT_Y;
 
 // Component arrays, indexed by entity
 extern active_component active_components[GLOBAL_MAX_ENTITIES];

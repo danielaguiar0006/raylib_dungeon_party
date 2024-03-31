@@ -1,7 +1,8 @@
 #include "grid.h"
 
 void init_grid(void) {
-    grid_texture = LoadTexture("assets/textures/grid.png");
+    // HACK: texture path is hardcoded for now, try (assets/textures/debug_empty.png) if it fails
+    grid_texture = LoadTexture("../../assets/textures/grid.png");
     grid_x = 0;
     grid_y = 0;
     //  gridWidth = static_cast<int>((WINDOW_WIDTH / CAMERA_ZOOM_FACTOR) / (TILE_WIDTH * TILE_SCALE_FACTOR));

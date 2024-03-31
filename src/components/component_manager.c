@@ -63,7 +63,8 @@ void add_component(entity ent, component_flags component) {
         velocity_components[ent].y = DEFAULT_Y;
         break;
     case COMPONENT_SPRITE:  // NOTE: Textures MUST be loaded after Window Initialization
-        Texture2D texture = LoadTexture("assets/textures/debug_empty.png");
+        // HACK: texture path is hardcoded for now, try (assets/textures/debug_empty.png) if it fails
+        Texture2D texture = LoadTexture("../../assets/textures/debug_empty.png");
         // set texture filter and wrap mode before setting the texture
         SetTextureFilter(texture, TEXTURE_FILTER_POINT);
         SetTextureWrap(texture, TEXTURE_WRAP_CLAMP);
