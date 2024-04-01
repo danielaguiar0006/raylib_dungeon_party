@@ -18,9 +18,9 @@ sprite_component* player_sprite;
 tag_component* player_tag;
 
 // Local Functions Declaration
-static void UpdateDrawFrame(void); // Update and draw one frame
-static void setup_window(void);    // Setup raylib window
-static void init_player(void);     // Create player entity and add components
+static void UpdateDrawFrame(void);  // Update and draw one frame
+static void setup_window(void);     // Setup raylib window
+static void init_player(void);      // Create player entity and add components
 
 // Main entry point
 int main(void) {
@@ -38,7 +38,7 @@ int main(void) {
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
 
-    SetTargetFPS(200); // Set our game's frames-per-second
+    SetTargetFPS(200);  // Set our game's frames-per-second
 
     // Main game loop
     while (!WindowShouldClose()) {  // Detect window close button or ESC key
@@ -48,7 +48,7 @@ int main(void) {
     // De-Initialization
     destroy_systems();
     destroy_grid();
-    CloseWindow(); // Close window and OpenGL context
+    CloseWindow();  // Close window and OpenGL context
     return 0;
 }
 
@@ -62,7 +62,7 @@ static void UpdateDrawFrame(void) {
     if (IsKeyPressed(KEY_E)) {
         entity ent = create_entity();
         //KDEBUG(TextFormat("created entity %d", ent));
-        KDEBUG("created entity %d", ent);
+        KDEBUG("Created entity: %d", ent);
         //add_component(ent, COMPONENT_POSITION);
     }
 

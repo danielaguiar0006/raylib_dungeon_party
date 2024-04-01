@@ -16,7 +16,7 @@ entity create_entity(void) {
             }
         }
     }
-    KERROR("No more entities available, consider increasing MAX_ENTITIES.");
+    KERROR("Unable to create entity: No more entities slots available, consider increasing MAX_ENTITIES.");
     return INVALID_ENTITY; // 0 is reserved for invalid entities
 }
 
