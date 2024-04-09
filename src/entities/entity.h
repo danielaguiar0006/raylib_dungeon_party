@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../utils/defines.h"
-#include "../utils/globals.h"
+#include "../core/globals.h"
 #include "../components/component_manager.h"
 
 typedef u32 entity;

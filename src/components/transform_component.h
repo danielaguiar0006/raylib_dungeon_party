@@ -1,7 +1,7 @@
 #pragma once
 
 #include <raylib.h>            // Vector2
-#include "../utils/globals.h"  // TILE_SCALE_FACTOR 
+#include "../core/globals.h"  // TILE_SCALE_FACTOR 
 #include "../utils/defines.h"
 #include "../core/logger.h"
 

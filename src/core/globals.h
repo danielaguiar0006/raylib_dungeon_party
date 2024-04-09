@@ -1,6 +1,6 @@
 #pragma once
 
-#include "defines.h"
+#include "../utils/defines.h"
 
 // Change for more or less total entities
 #define GLOBAL_MAX_ENTITIES 1024     // HACK: extern const not working using #define instead

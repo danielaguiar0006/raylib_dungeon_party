@@ -1,11 +1,11 @@
 #include "logger.h"
 
-b8 initialize_logging() {
+b8 initialize_logging(void) {
     // TODO: create log file
     return TRUE;
 }
 
-void shutdown_logging() {
+void shutdown_logging(void) {
     // TODO: cleanup logging/write queued entries
 }
 

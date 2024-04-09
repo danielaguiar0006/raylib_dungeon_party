@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../utils/defines.h"
-#include "../utils/globals.h"
+#include "../core/globals.h"
 #include "../entities/entity.h"
 #include "../core/logger.h"
 

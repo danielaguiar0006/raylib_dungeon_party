@@ -1,7 +1,7 @@
 #pragma once 
 
 #include <raylib.h>
-#include "globals.h"
+#include "../core/globals.h"
 
 // TODO: remove static and add to grid.c instead
 static Texture2D grid_texture;

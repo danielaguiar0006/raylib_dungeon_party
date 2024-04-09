@@ -2,6 +2,9 @@
 2. Implement movement system that moves entities with "player" tag
 3. Have the idea of a testbench in the back of your mind...
 4. Make grid an actual entity
+5. When player is completely destroyed, the entity count is not decremented 
+6. After destroying the player and adding a new entity, the player.active debug
+   text on the screen is TRUE/1 again... (I don't know if this is a problem)
 
 WHEN ADDING NEW .c FILE:
 1. Add the file to the list of sources in the CMakeLists.txt
@@ -16,3 +19,34 @@ WHEN CREATING NEW COMPONENT:
    and get_component() logic
 5. memset the component in the destroy_entity() function in entity.c
 6. If neccessary, implement system that uses the new component in src/systems/
+
+think about configuration file for textures and other resources:
+"
+Yes, there are several ways to handle file paths in a more flexible and robust manner:
+
+1. **Use a configuration file**: You can store the base path to your assets in a configuration file. This way, you only need to change the path in one place if it ever changes.
+
+2. **Environment variables**: You can use an environment variable to store the base path to your assets. This has the advantage of not requiring any changes to your code if the path changes, as long as the environment variable is updated.
+
+3. **Command line arguments**: You can pass the base path to your assets as a command line argument when you run your program. This gives you the flexibility to easily change the path for different runs of your program.
+
+4. **Resource file or asset manager**: You can create a resource file or asset manager that handles loading assets. This would abstract away the details of where the assets are stored.
+
+Here's an example of how you might implement the first option:
+
+```c
+// config.h
+#define ASSET_BASE_PATH "../../assets/textures/"
+
+// component_manager.c
+#include "config.h"
+
+void load_texture() {
+    char path[256];
+    snprintf(path, sizeof(path), "%s%s", ASSET_BASE_PATH, "debug_empty.png");
+    Texture2D texture = LoadTexture(path);
+}
+```
+
+In this example, `ASSET_BASE_PATH` is defined in `config.h`, and `load_texture()` uses this base path to construct the full path to the texture. If the base path ever changes, you only need to update `ASSET_BASE_PATH` in `config.h`.
+"

@@ -2,7 +2,7 @@
 
 #include "../components/component_manager.h"
 #include "../utils/defines.h"
-#include "../utils/globals.h"
+#include "../core/globals.h"
 
 typedef struct ActionInput {
     Vector2 movement_delta;

@@ -2,7 +2,7 @@
 
 #include "../components/component_manager.h"
 #include "../utils/defines.h"
-#include "../utils/globals.h"
+#include "../core/globals.h"
 #include "global_input.h"
 
 void init_player_actions(void);

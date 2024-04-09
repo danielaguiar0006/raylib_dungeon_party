@@ -15,3 +15,12 @@ void set_tag(tag_component* component, const char* tag) {
     strncpy(component->tag, tag, sizeof(component->tag));  // Safe copy
     component->tag[sizeof(component->tag) - 1] = '\0';     // Ensure null termination
 }
+
+const char* get_tag(const tag_component* component) {
+    if (component == NULL) {
+        KERROR("Unable to get tag: Component is NULL");
+        return NULL;
+    }
+
+    return component->tag;
+}

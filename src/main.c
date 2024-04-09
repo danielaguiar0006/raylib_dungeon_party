@@ -3,34 +3,39 @@
 #include "raylib.h"
 
 #include "utils/defines.h"
-#include "utils/globals.h"
+#include "core/globals.h"
 #include "entities/entity.h"
 #include "components/component_manager.h"
 #include "systems/systems.h"
 #include "core/logger.h"
 #include "utils/grid.h"
+// TODO: create entity handler or something like that to handle entity creation and destruction
+#include "entities/player_entity.h"
 
 // Local Variables Definition (local to this module)
-Camera2D camera = { 0 };
-entity player;
-transform_component* player_transform;
-sprite_component* player_sprite;
-tag_component* player_tag;
+static Camera2D camera = { 0 };
+static entity player;
+static transform_component* player_transform;
+static sprite_component* player_sprite;
+static tag_component* player_tag;
 
 // Local Functions Declaration
 static void UpdateDrawFrame(void);  // Update and draw one frame
 static void setup_window(void);     // Setup raylib window
-static void init_player(void);      // Create player entity and add components
 
 // Main entry point
 int main(void) {
     // Initialization
-    setup_window();
+    setup_window();  // ! Must be called before any other initialization
     init_component_manager();
     init_systems();
     init_grid();
 
-    init_player();
+    player = create_player_entity();
+    player_transform = (transform_component*)get_component(player, COMPONENT_TRANSFORM);
+    player_sprite = (sprite_component*)get_component(player, COMPONENT_SPRITE);
+    player_tag = (tag_component*)get_component(player, COMPONENT_TAG);
+    // TODO: move init_player_actions() to player_entity.c, maybe?
     init_player_actions(); // ! Must be called after player entity is created
 
     camera.target = (Vector2){ 0.0f, 0.0f };
@@ -66,11 +71,11 @@ static void UpdateDrawFrame(void) {
         //add_component(ent, COMPONENT_POSITION);
     }
 
-
     if (IsKeyPressed(KEY_Q)) {
         active_components[player].active = !active_components[player].active;
     }
     if (IsKeyPressed(KEY_Z)) {
+        // All other components must be removed before removing the "active" component
         remove_component(player, COMPONENT_ACTIVE);
     }
     if (IsKeyPressed(KEY_X)) {
@@ -78,6 +83,9 @@ static void UpdateDrawFrame(void) {
     }
     if (IsKeyPressed(KEY_C)) {
         remove_component(player, COMPONENT_SPRITE);
+    }
+    if (IsKeyPressed(KEY_V)) {
+        remove_component(player, COMPONENT_TAG);
     }
     // ---------------------------------------------
 
@@ -93,7 +101,7 @@ static void UpdateDrawFrame(void) {
     draw_sprites();
     // DrawRectangleRec(player_sprite->source_rectangle, RED);  // Debug
     // debug midpoint of player
-    DrawCircle(get_transform_midpoint(player_transform).x, get_transform_midpoint(player_transform).y, 5, RED);
+    //DrawCircle(get_transform_midpoint(player_transform).x, get_transform_midpoint(player_transform).y, 5, RED);
 
     EndMode2D();
 
@@ -109,16 +117,5 @@ static void UpdateDrawFrame(void) {
 
 void setup_window(void) {
     InitWindow(window_width, window_height, "Dungeon Party");
-    SetWindowState(FLAG_VSYNC_HINT);
-}
-
-void init_player(void) {
-    player = create_entity();
-    add_component(player, COMPONENT_TRANSFORM);
-    add_component(player, COMPONENT_SPRITE);
-    add_component(player, COMPONENT_TAG);
-    player_transform = (transform_component*)get_component(player, COMPONENT_TRANSFORM);
-    player_sprite = (sprite_component*)get_component(player, COMPONENT_SPRITE);
-    player_tag = (tag_component*)get_component(player, COMPONENT_TAG);
-    set_tag(player_tag, "player");
+    //SetWindowState(FLAG_VSYNC_HINT);  // VSYNC ON
 }

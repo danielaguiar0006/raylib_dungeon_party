@@ -15,3 +15,13 @@ typedef struct tag_component {
  * @param tag The tag to set.
  */
 void set_tag(tag_component* component, const char* tag);
+
+/**
+ * @brief Retrieves the tag from a tag_component.
+ * @param component The tag_component to retrieve the tag from.
+ * @return The tag string.
+ */
+
+const char* get_tag(const tag_component* component);
+
+// TODO: Maybe add overloads for set_tag and get_tag with entity parameter, instead of passing the component directly

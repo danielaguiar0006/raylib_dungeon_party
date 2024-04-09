@@ -25,8 +25,8 @@ typedef enum {
     LOG_LEVEL_TRACE = 5
 } log_level;
 
-b8 initialize_logging();
-void shutdown_logging();
+b8 initialize_logging(void);
+void shutdown_logging(void);
 
 /**
  * Outputs a log message with the specified log level.
