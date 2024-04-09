@@ -16,3 +16,15 @@ entity create_player_entity(void);
  */
 void add_player_components(entity player);
 //TODO: void destroy_player_entity(entity player);
+
+/**
+ * @brief Retrieves the speed of the player.
+ * @return The speed of the player as a floating-point value.
+ */
+f32 get_player_speed(void);
+
+/**
+ * @brief Sets the speed of the player.
+ * @param speed The speed value to set for the player.
+ */
+void set_player_speed(f32 speed);

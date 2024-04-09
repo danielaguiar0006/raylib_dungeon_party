@@ -1,7 +1,7 @@
 #include "player_actions.h"
 
 // Prototypes
-static void update_player_movement(void);
+static void update_player_movement(f32 delta_time);
 static entity find_player(void);
 
 // Static globals
@@ -20,11 +20,11 @@ void init_player_actions(void) {
     }
 }
 
-void update_player_actions(void) {
-    update_player_movement();
+void update_player_actions(f32 delta_time) {
+    update_player_movement(delta_time);
 }
 
-static void update_player_movement(void) {
+static void update_player_movement(f32 delta_time) {
     if (has_component(player, COMPONENT_TRANSFORM) && has_component(player, COMPONENT_ACTIVE)) {
         // Get the player's transform component
         transform_component* player_transform = get_component(player, COMPONENT_TRANSFORM);
@@ -35,8 +35,9 @@ static void update_player_movement(void) {
 
         if (active_components[player].active == TRUE) {
             // Move the player entity
-            player_transform->x += movement_delta->x;
-            player_transform->y += movement_delta->y;
+            //TODO: change 100.0f to player_speed or something
+            player_transform->x += movement_delta->x * delta_time * get_player_speed();
+            player_transform->y += movement_delta->y * delta_time * get_player_speed();
         }
     }
 }

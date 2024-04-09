@@ -60,7 +60,8 @@ int main(void) {
 // Update and draw game frame
 static void UpdateDrawFrame(void) {
     // Update
-    update_systems();
+    f32 delta_time = GetFrameTime();
+    update_systems(delta_time);
     update_grid();
 
     // --- DEBUG -----------------------------------

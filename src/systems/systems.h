@@ -7,5 +7,5 @@
 #include "player_actions.h"
 
 void init_systems(void);
-void update_systems(void);
+void update_systems(f32 delta_time);
 void destroy_systems(void);
