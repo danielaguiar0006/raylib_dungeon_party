@@ -1,9 +1,6 @@
-1. Implement tag component and assign "player" tag to player entity
-2. Implement movement system that moves entities with "player" tag
-3. Have the idea of a testbench in the back of your mind...
-4. Make grid an actual entity
-5. When player is completely destroyed, the entity count is not decremented 
-6. After destroying the player and adding a new entity, the player.active debug
+1. Have the idea of a testbench in the back of your mind...
+2. Make grid an actual entity
+3. After destroying the player and adding a new entity, the player.active debug
    text on the screen is TRUE/1 again... (I don't know if this is a problem)
 
 WHEN ADDING NEW .c FILE:

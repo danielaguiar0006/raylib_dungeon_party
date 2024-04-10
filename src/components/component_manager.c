@@ -106,7 +106,9 @@ void remove_component(entity ent, component_flags component) {
             KERROR("Unable remove active component from entity %d, it is required for other components.", ent);
             return;
         }
-        memset(&active_components[ent], 0, sizeof(active_component));
+
+        // Completely destroy the entity (reset bitmask and decrement entity count)
+        destroy_entity(ent);
         break;
     case COMPONENT_TAG:
         memset(&tag_components[ent], 0, sizeof(tag_component));
