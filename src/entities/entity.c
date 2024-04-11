@@ -31,7 +31,7 @@ void destroy_entity(entity ent) {
     memset(&tag_components[ent], 0, sizeof(tag_component));
     memset(&transform_components[ent], 0, sizeof(transform_component));
     memset(&sprite_components[ent], 0, sizeof(sprite_component));
-    memset(&velocity_components[ent], 0, sizeof(velocity_component));
+    memset(&movement_components[ent], 0, sizeof(movement_component));
 
     // Remove enitity from component masks array and decrement entity count
     entity_component_masks[ent] = COMPONENT_NONE;

@@ -10,18 +10,14 @@
 #include "tag_component.h"
 #include "transform_component.h"
 #include "sprite_component.h"
-#include "velocity_component.h"
-
-// Constants
-extern const f32 DEFAULT_X;
-extern const f32 DEFAULT_Y;
+#include "movement_component.h"
 
 // Component arrays, indexed by entity
 extern active_component active_components[GLOBAL_MAX_ENTITIES];
 extern tag_component tag_components[GLOBAL_MAX_ENTITIES];
 extern transform_component transform_components[GLOBAL_MAX_ENTITIES];
 extern sprite_component sprite_components[GLOBAL_MAX_ENTITIES];
-extern velocity_component velocity_components[GLOBAL_MAX_ENTITIES];
+extern movement_component movement_components[GLOBAL_MAX_ENTITIES];
 
 void init_component_manager(void);
 

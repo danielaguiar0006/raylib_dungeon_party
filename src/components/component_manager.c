@@ -1,13 +1,17 @@
 #include "component_manager.h"
 
-const f32 DEFAULT_X = 0.0f;
-const f32 DEFAULT_Y = 0.0f;
+static const f32 DEFAULT_X = 0.0f;
+static const f32 DEFAULT_Y = 0.0f;
+static const f32 DEFAULT_SPEED_MULTIPLIER = 1.0f;
+static const f32 DEFAULT_MAX_SPEED = 250.0f;
+static const f32 DEFAULT_ACCELERATION = 200.0f;
+static const f32 DEFAULT_DECELERATION = 200.0f;
 
 active_component active_components[GLOBAL_MAX_ENTITIES] = { 0 };
 tag_component tag_components[GLOBAL_MAX_ENTITIES] = { 0 };
 transform_component transform_components[GLOBAL_MAX_ENTITIES] = { 0 };
 sprite_component sprite_components[GLOBAL_MAX_ENTITIES] = { 0 };
-velocity_component velocity_components[GLOBAL_MAX_ENTITIES] = { 0 };
+movement_component movement_components[GLOBAL_MAX_ENTITIES] = { 0 };
 
 // TODO: not doing anything with this yet
 void init_component_manager(void) {
@@ -58,9 +62,14 @@ void add_component(entity ent, component_flags component) {
         transform_components[ent].rotation = 0.0f;            // Default rotation (radians)
         transform_components[ent].scale = TILE_SCALE_FACTOR;  // Default scale
         break;
-    case COMPONENT_VELOCITY:
-        velocity_components[ent].x = DEFAULT_X;
-        velocity_components[ent].y = DEFAULT_Y;
+    case COMPONENT_MOVEMENT:
+        movement_components[ent].current_speed = 0.0f;
+        movement_components[ent].speed_multiplier = DEFAULT_SPEED_MULTIPLIER;
+        movement_components[ent].max_speed = DEFAULT_MAX_SPEED;
+        movement_components[ent].acceleration = DEFAULT_ACCELERATION;
+        movement_components[ent].deceleration = DEFAULT_DECELERATION;
+        movement_components[ent].dx = 0.0f;
+        movement_components[ent].dy = 0.0f;
         break;
     case COMPONENT_SPRITE:  // NOTE: Textures MUST be loaded after Window Initialization
         // HACK: texture path is hardcoded for now, try (assets/textures/debug_empty.png) if it fails
@@ -116,8 +125,8 @@ void remove_component(entity ent, component_flags component) {
     case COMPONENT_TRANSFORM:
         memset(&transform_components[ent], 0, sizeof(transform_component));
         break;
-    case COMPONENT_VELOCITY:
-        memset(&velocity_components[ent], 0, sizeof(velocity_component));
+    case COMPONENT_MOVEMENT:
+        memset(&movement_components[ent], 0, sizeof(movement_component));
         break;
     case COMPONENT_SPRITE:
         UnloadTexture(sprite_components[ent].texture);  // Unload the texture from memory
@@ -145,8 +154,8 @@ void* get_component(entity ent, component_flags component_flag) {
             return &tag_components[ent];
         case COMPONENT_TRANSFORM:
             return &transform_components[ent];
-        case COMPONENT_VELOCITY:
-            return &velocity_components[ent];
+        case COMPONENT_MOVEMENT:
+            return &movement_components[ent];
         case COMPONENT_SPRITE:
             return &sprite_components[ent];
         default:

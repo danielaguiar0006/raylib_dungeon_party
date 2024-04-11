@@ -33,7 +33,7 @@ typedef enum {  // Component flags
     COMPONENT_TAG = 1 << 1,
     COMPONENT_TRANSFORM = 1 << 2,
     COMPONENT_SPRITE = 1 << 3,
-    COMPONENT_VELOCITY = 1 << 4,
+    COMPONENT_MOVEMENT = 1 << 4,
 } component_flags;
 
 // NULL definition

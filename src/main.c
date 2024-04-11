@@ -18,6 +18,7 @@ static entity player;
 static transform_component* player_transform;
 static sprite_component* player_sprite;
 static tag_component* player_tag;
+static movement_component* player_movement;
 
 // Local Functions Declaration
 static void UpdateDrawFrame(void);  // Update and draw one frame
@@ -35,6 +36,8 @@ int main(void) {
     player_transform = (transform_component*)get_component(player, COMPONENT_TRANSFORM);
     player_sprite = (sprite_component*)get_component(player, COMPONENT_SPRITE);
     player_tag = (tag_component*)get_component(player, COMPONENT_TAG);
+    player_movement = (movement_component*)get_component(player, COMPONENT_MOVEMENT);
+
     // TODO: move init_player_actions() to player_entity.c, maybe?
     init_player_actions(); // ! Must be called after player entity is created
 
@@ -65,6 +68,10 @@ static void UpdateDrawFrame(void) {
     update_grid();
 
     // --- DEBUG -----------------------------------
+    printf("\nx: %f", player_movement->dx);
+    printf("\ny: %f", player_movement->dy);
+    printf("\nspeed: %f", player_movement->current_speed);
+
     if (IsKeyPressed(KEY_E)) {
         entity ent = create_entity();
         //KDEBUG(TextFormat("created entity %d", ent));
