@@ -68,10 +68,6 @@ static void UpdateDrawFrame(void) {
     update_grid();
 
     // --- DEBUG -----------------------------------
-    //printf("\nx: %f", player_movement->dx);
-    //printf("\ny: %f", player_movement->dy);
-    //printf("\nspeed: %f", player_movement->current_speed);
-
     if (IsKeyPressed(KEY_E)) {
         entity ent = create_entity();
         //KDEBUG(TextFormat("created entity %d", ent));
@@ -95,6 +91,16 @@ static void UpdateDrawFrame(void) {
     if (IsKeyPressed(KEY_V)) {
         remove_component(player, COMPONENT_TAG);
     }
+    if (IsKeyPressed(KEY_B)) {
+        remove_component(player, COMPONENT_MOVEMENT);
+    }
+
+    if (IsKeyPressed(KEY_UP)) {
+        player_movement->speed_multiplier += 0.1f;
+    }
+    else if (IsKeyPressed(KEY_DOWN)) {
+        player_movement->speed_multiplier -= 0.1f;
+    }
     // ---------------------------------------------
 
 
@@ -113,12 +119,15 @@ static void UpdateDrawFrame(void) {
 
     EndMode2D();
 
+    DrawFPS(10, 10);
     DrawText(TextFormat("entity count: %i", get_entity_count()), 10, 30, 20, DARKGRAY);
     DrawText(TextFormat("player.x = : %f, .y = %f", transform_components[player].x, transform_components[player].y), 10, 60, 20, DARKGRAY);
     DrawText(TextFormat("player.grid_x = : %f, .grid_y = %f", transform_components[player].grid_x, transform_components[player].grid_y), 10, 90, 20, DARKGRAY);
     DrawText(TextFormat("player.active = %i", active_components[player].active), 10, 120, 20, DARKGRAY);
     DrawText(TextFormat("player.tag = %s", tag_components[player].tag), 10, 150, 20, DARKGRAY);
-    DrawFPS(10, 10);
+    DrawText(TextFormat("player.dx = %f : player.dy = %f", movement_components[player].dx, movement_components[player].dy), 10, 180, 20, DARKGRAY);
+    DrawText(TextFormat("player.current_speed = %f", movement_components[player].current_speed), 10, 210, 20, DARKGRAY);
+    DrawText(TextFormat("player.speed_multiplier = %f", movement_components[player].speed_multiplier), 10, 240, 20, DARKGRAY);
 
     EndDrawing();
 }

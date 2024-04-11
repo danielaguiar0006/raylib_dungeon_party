@@ -22,7 +22,7 @@ static void add_player_components(entity player) {
     player_tag = (tag_component*)get_component(player, COMPONENT_TAG);
     set_tag(player_tag, "player");
 
-    // TODO: Set player's movement component
+    // TODO: Set player's movement component with custom values
 }
 
 entity create_player_entity(void) {
@@ -34,7 +34,6 @@ entity create_player_entity(void) {
     add_player_components(player);
     return player;
 }
-
 
 entity get_player(void) {
     return player;

@@ -4,8 +4,8 @@ static const f32 DEFAULT_X = 0.0f;
 static const f32 DEFAULT_Y = 0.0f;
 static const f32 DEFAULT_SPEED_MULTIPLIER = 1.0f;
 static const f32 DEFAULT_MAX_SPEED = 250.0f;
-static const f32 DEFAULT_ACCELERATION = 200.0f;
-static const f32 DEFAULT_DECELERATION = 200.0f;
+static const f32 DEFAULT_ACCELERATION = 750.0f;
+static const f32 DEFAULT_DECELERATION = 3000.0f;
 
 active_component active_components[GLOBAL_MAX_ENTITIES] = { 0 };
 tag_component tag_components[GLOBAL_MAX_ENTITIES] = { 0 };
@@ -50,7 +50,7 @@ void add_component(entity ent, component_flags component) {
         //strcpy(tag_components[ent].tag, "");
         // ! Using strncpy() for safety, but it's not necessary here, and might introduce weirdness
         strncpy(tag_components[ent].tag, "", sizeof(tag_components[ent].tag));  // Safe copy
-        tag_components[ent].tag[sizeof(tag_components[ent].tag) - 1] = '\0';     // Ensure null termination
+        tag_components[ent].tag[sizeof(tag_components[ent].tag) - 1] = '\0';    // Ensure null termination
         break;
     case COMPONENT_TRANSFORM:
         transform_components[ent].x = DEFAULT_X;
@@ -70,6 +70,8 @@ void add_component(entity ent, component_flags component) {
         movement_components[ent].deceleration = DEFAULT_DECELERATION;
         movement_components[ent].dx = 0.0f;
         movement_components[ent].dy = 0.0f;
+        movement_components[ent].last_dx = 0.0f;
+        movement_components[ent].last_dy = 0.0f;
         break;
     case COMPONENT_SPRITE:  // NOTE: Textures MUST be loaded after Window Initialization
         // HACK: texture path is hardcoded for now, try (assets/textures/debug_empty.png) if it fails
