@@ -11,8 +11,9 @@
 entity create_player_entity(void);
 
 /**
- * @brief Adds the necessary components to the player entity.
- * @param player The player entity to add components to.
+ * @brief Retrieves the player entity.
+ * @return The player entity.
  */
-void add_player_components(entity player);
+entity get_player(void);
+
 //TODO: void destroy_player_entity(entity player);

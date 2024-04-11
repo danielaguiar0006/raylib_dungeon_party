@@ -1,16 +1,12 @@
 #include "player_entity.h"
 
-entity create_player_entity(void) {
-    entity player = create_entity();  // ! Will return INVALID_ENTITY (0) if error
-    if (player == INVALID_ENTITY) {
-        KERROR("Unable to create player entity.");
-        return INVALID_ENTITY;
-    }
-    add_player_components(player);
-    return player;
-}
+static entity player = INVALID_ENTITY;
 
-void add_player_components(entity player) {
+/**
+ * @brief Adds the necessary components to the player entity.
+ * @param player The player entity to add components to.
+ */
+static void add_player_components(entity player) {
     // Add components to player entity
     add_component(player, COMPONENT_TRANSFORM);
     add_component(player, COMPONENT_SPRITE);
@@ -27,4 +23,19 @@ void add_player_components(entity player) {
     set_tag(player_tag, "player");
 
     // TODO: Set player's movement component
+}
+
+entity create_player_entity(void) {
+    entity player = create_entity();  // ! Will return INVALID_ENTITY (0) if error
+    if (player == INVALID_ENTITY) {
+        KERROR("Unable to create player entity.");
+        return INVALID_ENTITY;
+    }
+    add_player_components(player);
+    return player;
+}
+
+
+entity get_player(void) {
+    return player;
 }

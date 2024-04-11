@@ -1,4 +1,4 @@
-// DEBUG with cmake debug
+// * DEBUG with cmake debug for breakpoints to work
 
 #include "raylib.h"
 

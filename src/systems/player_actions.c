@@ -2,15 +2,14 @@
 
 // Prototypes
 static void update_player_movement(f32 delta_time);
-static entity find_player(void);
 
 // Static globals
 static entity player = INVALID_ENTITY;
 static movement_component* player_movement;
 
 void init_player_actions(void) {
-    // Try to find the player entity
-    player = find_player();
+    // Get player entity
+    player = get_player();
 
     // Check if the player entity exists
     if (player == INVALID_ENTITY) {
@@ -61,18 +60,4 @@ static void update_player_movement(f32 delta_time) {
 
         // * The player's transform is being updated in update_entity_transforms.c
     }
-}
-
-// Find the player entity
-static entity find_player(void) {  // TODO: maybe move to entity.c or something?
-    for (u32 i = 0; i < GLOBAL_MAX_ENTITIES; i++) {
-        // Check if the entity has the tag component
-        if (has_component(i, COMPONENT_TAG)) {
-            // Check if the entity has the "player" tag
-            if (strcmp(tag_components[i].tag, "player") == 0) {
-                return get_entity_by_index(i);
-            }
-        }
-    }
-    return INVALID_ENTITY;
 }
