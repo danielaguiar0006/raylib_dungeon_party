@@ -68,9 +68,9 @@ static void UpdateDrawFrame(void) {
     update_grid();
 
     // --- DEBUG -----------------------------------
-    printf("\nx: %f", player_movement->dx);
-    printf("\ny: %f", player_movement->dy);
-    printf("\nspeed: %f", player_movement->current_speed);
+    //printf("\nx: %f", player_movement->dx);
+    //printf("\ny: %f", player_movement->dy);
+    //printf("\nspeed: %f", player_movement->current_speed);
 
     if (IsKeyPressed(KEY_E)) {
         entity ent = create_entity();

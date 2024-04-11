@@ -26,6 +26,7 @@ void update_player_actions(f32 delta_time) {
 }
 
 static void update_player_movement(f32 delta_time) {
+    // TODO: Add check for player entity's existence and more logging
     if (has_component(player, COMPONENT_TRANSFORM)
         && has_component(player, COMPONENT_ACTIVE)
         && has_component(player, COMPONENT_MOVEMENT)) {

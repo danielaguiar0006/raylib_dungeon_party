@@ -26,7 +26,7 @@ static void add_player_components(entity player) {
 }
 
 entity create_player_entity(void) {
-    entity player = create_entity();  // ! Will return INVALID_ENTITY (0) if error
+    player = create_entity();  // ! Will return INVALID_ENTITY (0) if error
     if (player == INVALID_ENTITY) {
         KERROR("Unable to create player entity.");
         return INVALID_ENTITY;
