@@ -11,6 +11,7 @@
 #include "transform_component.h"
 #include "sprite_component.h"
 #include "movement_component.h"
+#include "collider_component.h"
 
 // Component arrays, indexed by entity
 extern active_component active_components[GLOBAL_MAX_ENTITIES];
@@ -18,6 +19,7 @@ extern tag_component tag_components[GLOBAL_MAX_ENTITIES];
 extern transform_component transform_components[GLOBAL_MAX_ENTITIES];
 extern sprite_component sprite_components[GLOBAL_MAX_ENTITIES];
 extern movement_component movement_components[GLOBAL_MAX_ENTITIES];
+extern collider_component collider_components[GLOBAL_MAX_ENTITIES];
 
 void init_component_manager(void);
 

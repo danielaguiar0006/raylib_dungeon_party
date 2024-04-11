@@ -72,7 +72,10 @@ static void UpdateDrawFrame(void) {
         entity ent = create_entity();
         //KDEBUG(TextFormat("created entity %d", ent));
         KDEBUG("Created entity: %d", ent);
-        //add_component(ent, COMPONENT_POSITION);
+        add_component(ent, COMPONENT_TRANSFORM);
+        add_component(ent, COMPONENT_SPRITE);
+
+        set_transform_position_grid(&transform_components[ent], 12, 7);
     }
 
     if (IsKeyPressed(KEY_Q)) {
@@ -113,9 +116,6 @@ static void UpdateDrawFrame(void) {
 
     draw_grid();
     draw_sprites();
-    // DrawRectangleRec(player_sprite->source_rectangle, RED);  // Debug
-    // debug midpoint of player
-    //DrawCircle(get_transform_midpoint(player_transform).x, get_transform_midpoint(player_transform).y, 5, RED);
 
     EndMode2D();
 

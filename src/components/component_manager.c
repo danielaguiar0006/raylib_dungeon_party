@@ -12,6 +12,7 @@ tag_component tag_components[GLOBAL_MAX_ENTITIES] = { 0 };
 transform_component transform_components[GLOBAL_MAX_ENTITIES] = { 0 };
 sprite_component sprite_components[GLOBAL_MAX_ENTITIES] = { 0 };
 movement_component movement_components[GLOBAL_MAX_ENTITIES] = { 0 };
+collider_component collider_components[GLOBAL_MAX_ENTITIES] = { 0 };
 
 // TODO: not doing anything with this yet
 void init_component_manager(void) {
@@ -74,6 +75,8 @@ void add_component(entity ent, component_flags component) {
         movement_components[ent].last_dy = 0.0f;
         break;
     case COMPONENT_SPRITE:  // NOTE: Textures MUST be loaded after Window Initialization
+        // FIXME: LoadTexture() is called for every new sprite component added on the same texture
+        // TODO: Implement some sort of texture manager to prevent this
         // HACK: texture path is hardcoded for now, try (assets/textures/debug_empty.png) if it fails
         Texture2D texture = LoadTexture("../../assets/textures/debug_empty.png");
         // set texture filter and wrap mode before setting the texture
@@ -86,6 +89,14 @@ void add_component(entity ent, component_flags component) {
             TILE_SIZE_PX,
             TILE_SIZE_PX };
         sprite_components[ent].tint = WHITE;
+        break;
+    case COMPONENT_COLLIDER:
+        collider_components[ent].x = DEFAULT_X;
+        collider_components[ent].y = DEFAULT_Y;
+        collider_components[ent].width = TILE_SIZE_PX;
+        collider_components[ent].height = TILE_SIZE_PX;
+        collider_components[ent].scale = TILE_SCALE_FACTOR;
+        collider_components[ent].is_colliding = FALSE;
         break;
     default:
         KERROR("Unable add component: Invalid component: %d", component);
@@ -134,6 +145,9 @@ void remove_component(entity ent, component_flags component) {
         UnloadTexture(sprite_components[ent].texture);  // Unload the texture from memory
         memset(&sprite_components[ent], 0, sizeof(sprite_component));
         break;
+    case COMPONENT_COLLIDER:
+        memset(&collider_components[ent], 0, sizeof(collider_component));
+        break;
     default:
         KERROR("Unable Remove Component: Invalid component: %d", component);
         return;
@@ -160,6 +174,8 @@ void* get_component(entity ent, component_flags component_flag) {
             return &movement_components[ent];
         case COMPONENT_SPRITE:
             return &sprite_components[ent];
+        case COMPONENT_COLLIDER:
+            return &collider_components[ent];
         default:
             KERROR("Unable get component: Invalid component: %d", component_flag);
             return NULL;

@@ -2,6 +2,8 @@
 2. Make grid an actual entity
 3. After destroying the player and adding a new entity, the player.active debug
    text on the screen is TRUE/1 again... (I don't know if this is a problem)
+4. Create new entity and add working collision with it. One of it static, and
+   the other dynamic where i can push the entity.
 
 WHEN ADDING NEW .c FILE:
 1. Add the file to the list of sources in the CMakeLists.txt
